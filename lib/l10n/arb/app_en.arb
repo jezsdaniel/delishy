@@ -3,6 +3,10 @@
     "appName": "Delishy",
     "letsStart": "Let's start!",
     "allTheRecipesOnYourFingertips": "All the recipes on your fingertips",
+    "recipes": "Recipes",
+    "favorites": "Favorites",
+    "cookNow": "Cook Now!",
+    "settings": "Settings",
     "counterAppBarTitle": "Counter",
     "@counterAppBarTitle": {
         "description": "Text shown in the AppBar of the Counter Page"
