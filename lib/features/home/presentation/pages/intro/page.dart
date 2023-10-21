@@ -7,6 +7,15 @@ class IntroPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return const IntroView();
+  }
+}
+
+class IntroView extends StatelessWidget {
+  const IntroView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Scaffold(
       body: SafeArea(
@@ -17,6 +26,7 @@ class IntroPage extends StatelessWidget {
               Text(
                 l10n.appName,
                 style: Theme.of(context).textTheme.titleMedium,
+                key: const Key('introView_title'),
               ),
               const Spacer(),
               Image.asset(
@@ -31,6 +41,7 @@ class IntroPage extends StatelessWidget {
                 l10n.allTheRecipesOnYourFingertips,
                 style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.center,
+                key: const Key('introView_description'),
               ),
               const Spacer(),
               SizedBox(
