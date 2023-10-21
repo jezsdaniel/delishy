@@ -1,6 +1,8 @@
 import 'package:delishy/core/constants/constants.dart';
+import 'package:delishy/core/router/routes.dart';
 import 'package:delishy/l10n/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
@@ -47,7 +49,9 @@ class IntroView extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: FilledButton.tonal(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.go(Routes.home);
+                  },
                   child: Text(l10n.letsStart),
                 ),
               ),

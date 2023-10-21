@@ -1,4 +1,5 @@
-import 'package:delishy/features/home/presentation/pages/intro/intro.dart';
+import 'package:delishy/core/router/routes.dart';
+import 'package:delishy/features/home/presentation/pages/intro/page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -25,7 +26,7 @@ void main() {
       await tester.pumpApp(const IntroView());
       expect(find.byKey(const Key('introView_description')), findsOneWidget);
     });
-    testWidgets('renders button', (tester) async {
+    testWidgets('renders next button', (tester) async {
       await tester.pumpApp(const IntroView());
       expect(find.byType(FilledButton), findsOneWidget);
     });
@@ -38,6 +39,20 @@ void main() {
       expect(find.byType(Image), findsOneWidget);
       expect(find.byKey(const Key('introView_description')), findsOneWidget);
       expect(find.byType(FilledButton), findsOneWidget);
+    });
+    testWidgets('tapping on next button navigates to home page',
+        (tester) async {
+      await tester.pumpRouterApp(const IntroPage());
+      await tester.ensureVisible(
+        find.byType(FilledButton, skipOffstage: false),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.byType(FilledButton, skipOffstage: false),
+      );
+      await tester.pumpAndSettle();
+      expect(find.byKey(Key(getRouterKey(Routes.home))), findsOneWidget);
+      expect(find.byType(IntroPage), findsNothing);
     });
   });
 }
