@@ -6,20 +6,6 @@ import 'package:mocktail/mocktail.dart';
 
 void main() {
   group('RecipesAppBar', () {
-    testWidgets('renders RecipesAppBar', (tester) async {
-      final context = MockBuildContext();
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            appBar: RecipesAppBar(
-              titleText: 'Delishy',
-              context: context,
-            ),
-          ),
-        ),
-      );
-      expect(find.byType(RecipesAppBar), findsOneWidget);
-    });
     testWidgets('renders title and search icon', (tester) async {
       final context = MockBuildContext();
       await tester.pumpWidget(
