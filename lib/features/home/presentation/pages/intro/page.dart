@@ -32,7 +32,7 @@ class IntroView extends StatelessWidget {
               ),
               const Spacer(),
               Image.asset(
-                AssetsPaths.boyCookImage,
+                AssetsPaths.cuttingBoardImage,
                 height: 192,
               ),
               const SizedBox(
@@ -50,7 +50,7 @@ class IntroView extends StatelessWidget {
                 width: double.infinity,
                 child: FilledButton.tonal(
                   onPressed: () {
-                    context.go(Routes.home);
+                    context.go(Routes.recipes);
                   },
                   child: Text(l10n.letsStart),
                 ),
