@@ -48,18 +48,22 @@ class _HomeViewState extends State<HomeView> {
         },
         destinations: [
           NavigationDestination(
+            key: const Key('homeView_recipesItem'),
             icon: const Icon(Ionicons.bulb_outline),
             label: l10n.recipes,
           ),
           NavigationDestination(
+            key: const Key('homeView_favoritesItem'),
             icon: const Icon(Ionicons.list_outline),
             label: l10n.favorites,
           ),
           NavigationDestination(
+            key: const Key('homeView_cookNowItem'),
             icon: const Icon(Ionicons.restaurant_outline),
             label: l10n.cookNow,
           ),
           NavigationDestination(
+            key: const Key('homeView_settingsItem'),
             icon: const Icon(Ionicons.settings_outline),
             label: l10n.settings,
           ),

@@ -1,6 +1,10 @@
 import 'package:delishy/core/router/routes.dart';
+import 'package:delishy/features/cook/presentation/pages/cook/page.dart';
+import 'package:delishy/features/favorites/presentation/pages/favorites/page.dart';
 import 'package:delishy/features/home/presentation/pages/home/page.dart';
 import 'package:delishy/features/home/presentation/pages/intro/page.dart';
+import 'package:delishy/features/recipes/presentation/pages/recipes/page.dart';
+import 'package:delishy/features/settings/presentation/pages/settings/page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -25,9 +29,7 @@ class AppNavigation {
                 path: Routes.recipes,
                 pageBuilder: (context, GoRouterState state) {
                   return getPage(
-                    child: Container(
-                      child: Text('Recipes'),
-                    ),
+                    child: const RecipesPage(),
                     state: state,
                   );
                 },
@@ -41,9 +43,7 @@ class AppNavigation {
                 path: Routes.favorites,
                 pageBuilder: (context, GoRouterState state) {
                   return getPage(
-                    child: Container(
-                      child: Text('Favorites'),
-                    ),
+                    child: const FavoritesPage(),
                     state: state,
                   );
                 },
@@ -57,9 +57,7 @@ class AppNavigation {
                 path: Routes.cookNow,
                 pageBuilder: (context, GoRouterState state) {
                   return getPage(
-                    child: Container(
-                      child: Text('Cook now'),
-                    ),
+                    child: const CookPage(),
                     state: state,
                   );
                 },
@@ -73,9 +71,7 @@ class AppNavigation {
                 path: Routes.settings,
                 pageBuilder: (context, GoRouterState state) {
                   return getPage(
-                    child: Container(
-                      child: Text('Settings'),
-                    ),
+                    child: const SettingsPage(),
                     state: state,
                   );
                 },

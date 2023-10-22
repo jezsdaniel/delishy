@@ -40,4 +40,24 @@ extension PumpApp on WidgetTester {
       ),
     );
   }
+
+  Future<void> pumpRouterAppLocation(String initialLocation) {
+    AppNavigation.instance;
+
+    final router = GoRouter(
+      navigatorKey: AppNavigation.parentNavigatorKey,
+      initialLocation: initialLocation,
+      routes: [
+        ...AppNavigation.router.configuration.routes,
+      ],
+    );
+
+    return pumpWidget(
+      MaterialApp.router(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        routerConfig: router,
+      ),
+    );
+  }
 }

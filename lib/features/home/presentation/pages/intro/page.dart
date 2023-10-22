@@ -32,7 +32,7 @@ class IntroView extends StatelessWidget {
               ),
               const Spacer(),
               Image.asset(
-                AssetsPaths.boyCookImage,
+                AssetsPaths.cuttingBoardImage,
                 height: 192,
               ),
               const SizedBox(
