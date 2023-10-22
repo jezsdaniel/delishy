@@ -1,39 +1,50 @@
 import 'package:delishy/l10n/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({
+    required this.child,
+    super.key,
+  });
+
+  final StatefulNavigationShell child;
 
   @override
   Widget build(BuildContext context) {
-    return const HomeView();
+    return HomeView(
+      child: child,
+    );
   }
 }
 
 class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+  const HomeView({
+    required this.child,
+    super.key,
+  });
+
+  final StatefulNavigationShell child;
 
   @override
   State<HomeView> createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView> {
-  int currentPageIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Scaffold(
-      body: const Center(
-        child: Text('Home'),
-      ),
+      body: widget.child,
       bottomNavigationBar: NavigationBar(
-        selectedIndex: currentPageIndex,
+        selectedIndex: widget.child.currentIndex,
         onDestinationSelected: (index) {
-          setState(() {
-            currentPageIndex = index;
-          });
+          widget.child.goBranch(
+            index,
+            initialLocation: index == widget.child.currentIndex,
+          );
+          setState(() {});
         },
         destinations: [
           NavigationDestination(

@@ -8,8 +8,9 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppNavigation.instance;
     return MaterialApp.router(
-      routerConfig: appRouter(),
+      routerConfig: AppNavigation.router,
       theme: appTheme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

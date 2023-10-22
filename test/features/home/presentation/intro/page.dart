@@ -1,4 +1,4 @@
-import 'package:delishy/core/router/routes.dart';
+import 'package:delishy/features/home/presentation/pages/home/page.dart';
 import 'package:delishy/features/home/presentation/pages/intro/page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -51,7 +51,7 @@ void main() {
         find.byType(FilledButton, skipOffstage: false),
       );
       await tester.pumpAndSettle();
-      expect(find.byKey(Key(getRouterKey(Routes.home))), findsOneWidget);
+      expect(find.byType(HomePage), findsOneWidget);
       expect(find.byType(IntroPage), findsNothing);
     });
   });
