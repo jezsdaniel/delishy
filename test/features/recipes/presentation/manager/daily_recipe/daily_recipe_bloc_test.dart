@@ -3,14 +3,13 @@ import 'package:dartz/dartz.dart';
 import 'package:delishy/core/errors/failure.dart';
 import 'package:delishy/core/network/request_status.dart';
 import 'package:delishy/features/recipes/data/models/responses/random_meal.dart';
-import 'package:delishy/features/recipes/domain/use_cases/get_random_meal.dart';
 import 'package:delishy/features/recipes/presentation/manager/daily_recipe/daily_recipe_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../data/mocks/random_meal.dart';
+import '../../../../../../lib/features/recipes/domain/use_cases/get_random_meal_mock.dart';
 
-class MockGetRandomMealUseCase extends Mock implements GetRandomMealUseCase {}
 
 void main() {
   group('DailyRecipeBloc', () {

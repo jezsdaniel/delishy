@@ -1,5 +1,5 @@
 import 'package:delishy/features/recipes/presentation/pages/recipes/app_bar.dart';
-import 'package:delishy/features/recipes/presentation/pages/recipes/daily_recipe.dart';
+import 'package:delishy/features/recipes/presentation/pages/recipes/daily_recipe/daily_recipe.dart';
 import 'package:delishy/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
@@ -23,8 +23,8 @@ class RecipesView extends StatelessWidget {
         titleText: l11n.appName,
         context: context,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(
+      body: const SingleChildScrollView(
+        padding: EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 40,
         ),

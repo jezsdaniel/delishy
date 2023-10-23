@@ -27,7 +27,6 @@ class RecipesRemoteApiImpl extends RecipesRemoteApi {
         throw ServerException(message: 'Something went wrong');
       }
     } catch (ex) {
-      print(ex.toString());
       throw ServerException(message: 'Something went wrong');
     }
   }

@@ -12,6 +12,8 @@
     "roastedPumpkinSoup": "Roasted Pumpkin Soup",
     "min": "min",
     "ppl": "ppl",
+    "oopsSomethingWentWrong": "Oops!, something went wrong",
+    "tryAgain": "Try again",
     "counterAppBarTitle": "Counter",
     "@counterAppBarTitle": {
         "description": "Text shown in the AppBar of the Counter Page"

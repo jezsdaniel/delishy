@@ -2,17 +2,15 @@ import 'package:dartz/dartz.dart';
 import 'package:delishy/core/errors/exceptions.dart';
 import 'package:delishy/core/errors/failure.dart';
 import 'package:delishy/core/network/connectivity.dart';
-import 'package:delishy/features/recipes/data/data_sources/recipes_remote_api.dart';
 import 'package:delishy/features/recipes/data/models/responses/random_meal.dart';
 import 'package:delishy/features/recipes/data/repositories/recipes_repository_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../../lib/core/network/connectivity_mock.dart';
+import '../../../../../lib/features/recipes/data/data_sources/recipes_remote_api_mock.dart';
 import '../mocks/random_meal.dart';
 
-class MockRecipesRemoteApi extends Mock implements RecipesRemoteApi {}
-
-class MockConnectivityService extends Mock implements ConnectivityService {}
 
 void main() {
   group('getRandomMeal', () {

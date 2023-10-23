@@ -23,12 +23,14 @@ dependencies:
   intl: ^0.18.0
   ionicons: ^0.2.2
   rxdart: ^0.27.7
+  skeletonizer: ^0.8.0
 
 dev_dependencies:
   bloc_test: ^9.1.4
   flutter_test:
     sdk: flutter
   mocktail: ^1.0.0
+  network_image_mock: ^2.0.1
   very_good_analysis: ^5.1.0
 
 flutter:

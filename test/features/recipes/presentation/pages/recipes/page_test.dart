@@ -1,5 +1,5 @@
 import 'package:delishy/features/recipes/presentation/pages/recipes/app_bar.dart';
-import 'package:delishy/features/recipes/presentation/pages/recipes/daily_recipe.dart';
+import 'package:delishy/features/recipes/presentation/pages/recipes/daily_recipe/daily_recipe.dart';
 import 'package:delishy/features/recipes/presentation/pages/recipes/page.dart';
 import 'package:flutter_test/flutter_test.dart';
 
