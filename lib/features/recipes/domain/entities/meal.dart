@@ -55,6 +55,11 @@ class Meal extends Equatable {
     );
   }
 
+  static const empty = Meal(
+    id: '',
+    name: '',
+  );
+
   final String id;
   final String name;
   final String? drinkAlternate;

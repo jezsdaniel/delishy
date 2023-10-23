@@ -1,4 +1,4 @@
-import 'package:delishy/core/constants/constants.dart';
+import 'package:delishy/core/constants/assets.dart';
 import 'package:delishy/core/router/routes.dart';
 import 'package:delishy/l10n/l10n.dart';
 import 'package:flutter/material.dart';

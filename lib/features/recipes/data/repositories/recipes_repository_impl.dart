@@ -8,21 +8,21 @@ import 'package:delishy/features/recipes/domain/repositories/recipes_repository.
 
 class RecipesRepositoryImpl implements RecipesRepository {
   RecipesRepositoryImpl(
-    this._api,
-    this._connectivityService,
+    this.api,
+    this.connectivityService,
   );
 
-  final RecipesRemoteApi _api;
-  final ConnectivityService _connectivityService;
+  final RecipesRemoteApi api;
+  final ConnectivityService connectivityService;
 
   @override
   Future<Either<Failure, RandomMealResponseModel>> getRandomMeal() async {
     try {
-      if (_connectivityService.connectionStatus == ConnectionStatus.offline) {
+      if (connectivityService.connectionStatus == ConnectionStatus.offline) {
         return Left(NetworkFailure());
       }
 
-      final resp = await _api.getRandomMeal();
+      final resp = await api.getRandomMeal();
 
       return Right(resp);
     } catch (ex) {
