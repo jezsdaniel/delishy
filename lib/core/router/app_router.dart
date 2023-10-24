@@ -3,6 +3,8 @@ import 'package:delishy/features/cook/presentation/pages/cook/page.dart';
 import 'package:delishy/features/favorites/presentation/pages/favorites/page.dart';
 import 'package:delishy/features/home/presentation/pages/home/page.dart';
 import 'package:delishy/features/home/presentation/pages/intro/page.dart';
+import 'package:delishy/features/recipes/domain/entities/meal.dart';
+import 'package:delishy/features/recipes/presentation/pages/recipe_details/page.dart';
 import 'package:delishy/features/recipes/presentation/pages/recipes/page.dart';
 import 'package:delishy/features/settings/presentation/pages/settings/page.dart';
 import 'package:flutter/material.dart';
@@ -88,6 +90,16 @@ class AppNavigation {
             child: HomePage(
               child: navigationShell,
             ),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        path: Routes.recipeDetails,
+        pageBuilder: (context, state) {
+          final recipe = state.extra as Meal?;
+          return getPage(
+            child: RecipeDetailsPage(recipe: recipe ?? Meal.empty),
             state: state,
           );
         },

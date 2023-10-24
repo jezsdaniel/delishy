@@ -1,4 +1,5 @@
 import 'package:delishy/features/recipes/domain/entities/meal.dart';
+import 'package:delishy/features/recipes/presentation/pages/recipe_details/page.dart';
 import 'package:delishy/features/recipes/presentation/pages/recipes/daily_recipe/success.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -59,6 +60,24 @@ void main() {
       );
 
       expect(find.byType(Image), findsOneWidget);
+    });
+
+    testWidgets('tapping on recipe card navigates to recipe details',
+        (tester) async {
+      await mockNetworkImagesFor(
+        () => tester.pumpRouterApp(
+          DailyRecipeSuccess(meal: meal),
+        ),
+      );
+      await tester.ensureVisible(
+        find.byType(InkWell, skipOffstage: false),
+      );
+      await tester.tap(
+        find.byType(InkWell, skipOffstage: false),
+      );
+      await tester.pumpAndSettle();
+      expect(find.byType(RecipeDetailsPage), findsOneWidget);
+      expect(find.byType(DailyRecipeSuccess), findsNothing);
     });
   });
 }
