@@ -16,24 +16,17 @@ void main() {
   );
 
   group('FavoritesEvent', () {
-    group('FavoritesEventAdd', () {
+    group('FavoritesEventSubscriptionRequested', () {
       test('support value equality', () {
-        const instanceA = FavoritesEventAdd(meal);
-        const instanceB = FavoritesEventAdd(meal);
+        const instanceA = FavoritesEventSubscriptionRequested();
+        const instanceB = FavoritesEventSubscriptionRequested();
         expect(instanceA, equals(instanceB));
       });
     });
-    group('FavoritesEventRemove', () {
+    group('FavoritesEventToggle', () {
       test('support value equality', () {
-        const instanceA = FavoritesEventRemove(meal);
-        const instanceB = FavoritesEventRemove(meal);
-        expect(instanceA, equals(instanceB));
-      });
-    });
-    group('FavoritesEventGetAll', () {
-      test('support value equality', () {
-        const instanceA = FavoritesEventGetAll();
-        const instanceB = FavoritesEventGetAll();
+        const instanceA = FavoritesEventToggle(meal);
+        const instanceB = FavoritesEventToggle(meal);
         expect(instanceA, equals(instanceB));
       });
     });

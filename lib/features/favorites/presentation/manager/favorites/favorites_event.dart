@@ -7,8 +7,8 @@ abstract class FavoritesEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FavoritesEventAdd extends FavoritesEvent {
-  const FavoritesEventAdd(this.meal);
+class FavoritesEventToggle extends FavoritesEvent {
+  const FavoritesEventToggle(this.meal);
 
   final Meal meal;
 
@@ -16,15 +16,6 @@ class FavoritesEventAdd extends FavoritesEvent {
   List<Object> get props => [meal];
 }
 
-class FavoritesEventRemove extends FavoritesEvent {
-  const FavoritesEventRemove(this.meal);
-
-  final Meal meal;
-
-  @override
-  List<Object> get props => [meal];
-}
-
-class FavoritesEventGetAll extends FavoritesEvent {
-  const FavoritesEventGetAll();
+class FavoritesEventSubscriptionRequested extends FavoritesEvent {
+  const FavoritesEventSubscriptionRequested();
 }

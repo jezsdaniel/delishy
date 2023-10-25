@@ -7,5 +7,5 @@ abstract class FavoritesRepository {
 
   Future<Either<Failure, int>> removeFavorites(Meal meal);
 
-  Future<Either<Failure, List<Meal>>> getAllFavorites();
+  Future<Either<Failure, Stream<List<Meal>>>> getAllFavorites();
 }

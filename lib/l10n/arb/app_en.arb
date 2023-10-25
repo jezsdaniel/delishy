@@ -17,6 +17,7 @@
     "counterAppBarTitle": "Counter",
     "instructions": "Instructions",
     "ingredients": "Ingredients",
+    "favoriteRecipes": "Favorite recipes",
     "@counterAppBarTitle": {
         "description": "Text shown in the AppBar of the Counter Page"
     }

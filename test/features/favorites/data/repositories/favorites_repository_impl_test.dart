@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:delishy/core/errors/failure.dart';
 import 'package:delishy/features/favorites/data/data_sources/favorites_local_api.dart';
@@ -75,13 +77,18 @@ void main() {
     group('getAllFavorites', () {
       test('should get all favorite meals', () async {
         final mockMeals = [const Meal(id: '1', name: 'Test Meal')];
-        when(() => mockLocalStorage.getAllFavorites())
-            .thenAnswer((_) async => mockMeals);
+
+        final streamController = StreamController<List<Meal>>();
+        streamController.sink.add(mockMeals);
+        when(() => mockLocalStorage.getAllFavorites()).thenAnswer((_) {
+          return streamController.stream;
+        });
 
         final result = await repository.getAllFavorites();
 
-        expect(result, Right<Failure, List<Meal>>(mockMeals));
-        verify(() => mockLocalStorage.getAllFavorites()).called(1);
+        expect(result,
+            Right<Failure, Stream<List<Meal>>>(streamController.stream));
+        verify(() => mockLocalStorage.getAllFavorites());
         verifyNoMoreInteractions(mockLocalStorage);
       });
 

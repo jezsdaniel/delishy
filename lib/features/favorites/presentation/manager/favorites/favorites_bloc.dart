@@ -19,21 +19,34 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
     this._removeFavoriteUseCase,
     this._getAllFavoritesUseCase,
   ) : super(const FavoritesState()) {
-    on<FavoritesEventAdd>(_onFavoritesEventAdd);
-    on<FavoritesEventRemove>(_onFavoritesEventRemove);
-    on<FavoritesEventGetAll>(_onFavoritesEventGetAll);
+    on<FavoritesEventToggle>(_onFavoritesEventToggle);
+    on<FavoritesEventSubscriptionRequested>(
+        _onFavoritesEventSubscriptionRequested);
   }
 
   final AddFavoriteUseCase _addFavoriteUseCase;
   final RemoveFavoriteUseCase _removeFavoriteUseCase;
   final GetAllFavoritesUseCase _getAllFavoritesUseCase;
 
-  Future<void> _onFavoritesEventAdd(
-    FavoritesEventAdd event,
+  Future<void> _onFavoritesEventToggle(
+    FavoritesEventToggle event,
     Emitter<FavoritesState> emit,
   ) async {
-    emit(state.copyWith(status: RequestStatus.loading));
-    final resp = await _addFavoriteUseCase(Params(event.meal));
+    emit(
+      state.copyWith(status: RequestStatus.loading),
+    );
+    if (state.favorites.contains(event.meal)) {
+      await _onFavoritesEventRemove(event.meal, emit);
+    } else {
+      await _onFavoritesEventAdd(event.meal, emit);
+    }
+  }
+
+  Future<void> _onFavoritesEventAdd(
+    Meal meal,
+    Emitter<FavoritesState> emit,
+  ) async {
+    final resp = await _addFavoriteUseCase(Params(meal));
     resp.fold(
       (l) {
         emit(
@@ -43,23 +56,15 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
           ),
         );
       },
-      (_) {
-        emit(
-          state.copyWith(
-            status: RequestStatus.success,
-            favorites: [event.meal, ...state.favorites],
-          ),
-        );
-      },
+      (_) {},
     );
   }
 
   Future<void> _onFavoritesEventRemove(
-    FavoritesEventRemove event,
+    Meal meal,
     Emitter<FavoritesState> emit,
   ) async {
-    emit(state.copyWith(status: RequestStatus.loading));
-    final resp = await _removeFavoriteUseCase(Params(event.meal));
+    final resp = await _removeFavoriteUseCase(Params(meal));
     resp.fold(
       (l) {
         emit(
@@ -69,25 +74,17 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
           ),
         );
       },
-      (_) {
-        emit(
-          state.copyWith(
-            status: RequestStatus.success,
-            favorites:
-                state.favorites.where((e) => e.id != event.meal.id).toList(),
-          ),
-        );
-      },
+      (_) {},
     );
   }
 
-  Future<void> _onFavoritesEventGetAll(
-    FavoritesEventGetAll event,
+  Future<void> _onFavoritesEventSubscriptionRequested(
+    FavoritesEventSubscriptionRequested event,
     Emitter<FavoritesState> emit,
   ) async {
     emit(state.copyWith(status: RequestStatus.loading));
     final resp = await _getAllFavoritesUseCase(NoParams());
-    resp.fold(
+    await resp.fold(
       (l) {
         emit(
           state.copyWith(
@@ -96,11 +93,15 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
           ),
         );
       },
-      (r) {
-        emit(
-          state.copyWith(
+      (r) async {
+        await emit.forEach<List<Meal>>(
+          r,
+          onData: (favorites) => state.copyWith(
             status: RequestStatus.success,
-            favorites: r,
+            favorites: favorites,
+          ),
+          onError: (_, __) => state.copyWith(
+            status: RequestStatus.failure,
           ),
         );
       },

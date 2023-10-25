@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
         Injector.getIt!.get(),
         Injector.getIt!.get(),
         Injector.getIt!.get(),
-      ),
+      )..add(const FavoritesEventSubscriptionRequested()),
       child: HomeView(
         child: child,
       ),
