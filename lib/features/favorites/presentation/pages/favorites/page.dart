@@ -1,4 +1,3 @@
-import 'package:delishy/features/home/presentation/pages/coming_soon/page.dart';
 import 'package:flutter/material.dart';
 
 class FavoritesPage extends StatelessWidget {
@@ -6,6 +5,15 @@ class FavoritesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ComingSoonPage();
+    return FavoritesView();
+  }
+}
+
+class FavoritesView extends StatelessWidget {
+  const FavoritesView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }

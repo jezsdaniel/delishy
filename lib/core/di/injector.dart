@@ -4,6 +4,12 @@ import 'package:delishy/core/network/http_client_mock.dart';
 import 'package:delishy/features/favorites/data/data_sources/favorites_local_api.dart';
 import 'package:delishy/features/favorites/data/data_sources/favorites_local_api_impl.dart';
 import 'package:delishy/features/favorites/data/data_sources/favorites_local_api_mock.dart';
+import 'package:delishy/features/favorites/data/repositories/favorites_repository_impl.dart';
+import 'package:delishy/features/favorites/domain/repositories/favorites_repository.dart';
+import 'package:delishy/features/favorites/domain/use_cases/add_favorite.dart';
+import 'package:delishy/features/favorites/domain/use_cases/get_all_favorites.dart';
+import 'package:delishy/features/favorites/domain/use_cases/remove_favorite.dart';
+import 'package:delishy/features/favorites/presentation/manager/favorites/favorites_bloc.dart';
 import 'package:delishy/features/recipes/data/data_sources/recipes_remote_api.dart';
 import 'package:delishy/features/recipes/data/data_sources/recipes_remote_api_mock.dart';
 import 'package:delishy/features/recipes/data/repositories/recipes_repository_impl.dart';
@@ -59,17 +65,32 @@ class Injector {
         getIt!.get(),
       ),
     );
+    getIt!.registerFactory<FavoritesBloc>(
+      () => FavoritesBloc(getIt!.get(), getIt!.get(), getIt!.get()),
+    );
   }
 
   void _registerUserCaseLayer() {
     getIt!.registerLazySingleton<GetRandomMealUseCase>(
       () => GetRandomMealUseCase(getIt!.get()),
     );
+    getIt!.registerLazySingleton<AddFavoriteUseCase>(
+      () => AddFavoriteUseCase(getIt!.get()),
+    );
+    getIt!.registerLazySingleton<RemoveFavoriteUseCase>(
+      () => RemoveFavoriteUseCase(getIt!.get()),
+    );
+    getIt!.registerLazySingleton<GetAllFavoritesUseCase>(
+      () => GetAllFavoritesUseCase(getIt!.get()),
+    );
   }
 
   void _registerRepositoryLayer() {
     getIt!.registerLazySingleton<RecipesRepository>(
       () => RecipesRepositoryImpl(getIt!.get(), getIt!.get()),
+    );
+    getIt!.registerLazySingleton<FavoritesRepository>(
+      () => FavoritesRepositoryImpl(getIt!.get()),
     );
   }
 
@@ -94,16 +115,32 @@ class Injector {
         getIt!.get(),
       ),
     );
+    getIt!.registerFactory<FavoritesBloc>(
+      () => FavoritesBloc(getIt!.get(), getIt!.get(), getIt!.get()),
+    );
   }
 
   void _registerUserCaseLayerTest() {
     getIt!.registerLazySingleton<GetRandomMealUseCase>(
-        () => GetRandomMealUseCase(getIt!.get()));
+      () => GetRandomMealUseCase(getIt!.get()),
+    );
+    getIt!.registerLazySingleton<AddFavoriteUseCase>(
+      () => AddFavoriteUseCase(getIt!.get()),
+    );
+    getIt!.registerLazySingleton<RemoveFavoriteUseCase>(
+      () => RemoveFavoriteUseCase(getIt!.get()),
+    );
+    getIt!.registerLazySingleton<GetAllFavoritesUseCase>(
+      () => GetAllFavoritesUseCase(getIt!.get()),
+    );
   }
 
   void _registerRepositoryLayerTest() {
     getIt!.registerLazySingleton<RecipesRepository>(
       () => RecipesRepositoryImpl(getIt!.get(), getIt!.get()),
+    );
+    getIt!.registerLazySingleton<FavoritesRepository>(
+      () => FavoritesRepositoryImpl(getIt!.get()),
     );
   }
 }

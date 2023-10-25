@@ -1,5 +1,8 @@
+import 'package:delishy/core/di/injector.dart';
+import 'package:delishy/features/favorites/presentation/manager/favorites/favorites_bloc.dart';
 import 'package:delishy/l10n/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -13,8 +16,15 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HomeView(
-      child: child,
+    return BlocProvider(
+      create: (context) => FavoritesBloc(
+        Injector.getIt!.get(),
+        Injector.getIt!.get(),
+        Injector.getIt!.get(),
+      ),
+      child: HomeView(
+        child: child,
+      ),
     );
   }
 }
