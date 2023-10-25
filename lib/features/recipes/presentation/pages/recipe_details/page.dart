@@ -1,6 +1,10 @@
+import 'package:delishy/core/network/request_status.dart';
+import 'package:delishy/core/theme/colors.dart';
+import 'package:delishy/features/favorites/presentation/manager/favorites/favorites_bloc.dart';
 import 'package:delishy/features/recipes/domain/entities/meal.dart';
 import 'package:delishy/l10n/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -36,10 +40,30 @@ class RecipeDetailsView extends StatelessWidget {
             title: Text(recipe.name),
             titleTextStyle: Theme.of(context).textTheme.displaySmall,
             actions: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Ionicons.star_outline),
-                key: const Key('recipeDetails_favoriteIconButton'),
+              BlocBuilder<FavoritesBloc, FavoritesState>(
+                builder: (context, state) {
+                  if (state.status == RequestStatus.loading) {
+                    return const SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return IconButton(
+                    onPressed: () {
+                      context
+                          .read<FavoritesBloc>()
+                          .add(FavoritesEventToggle(recipe));
+                    },
+                    icon: state.favorites.contains(recipe)
+                        ? const Icon(
+                            Ionicons.star,
+                            color: AppColors.earthYellow,
+                          )
+                        : const Icon(Ionicons.star_outline),
+                    key: const Key('recipeDetails_favoriteIconButton'),
+                  );
+                },
               ),
             ],
           ),

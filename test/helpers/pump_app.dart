@@ -1,9 +1,14 @@
 import 'package:delishy/core/di/injector.dart';
+import 'package:delishy/core/network/request_status.dart';
 import 'package:delishy/core/router/router.dart';
+import 'package:delishy/features/favorites/presentation/manager/favorites/daily_recipe_bloc_mock.dart';
+import 'package:delishy/features/favorites/presentation/manager/favorites/favorites_bloc.dart';
 import 'package:delishy/l10n/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mocktail/mocktail.dart';
 
 extension PumpApp on WidgetTester {
   Future<void> pumpApp(Widget widget) {
@@ -37,11 +42,20 @@ extension PumpApp on WidgetTester {
       ],
     );
 
+    final mockBloc = FavoritesBlocMock();
+
+    when(() => mockBloc.state).thenReturn(
+      const FavoritesState(status: RequestStatus.success),
+    );
+
     return pumpWidget(
-      MaterialApp.router(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        routerConfig: router,
+      BlocProvider<FavoritesBloc>(
+        create: (context) => mockBloc,
+        child: MaterialApp.router(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          routerConfig: router,
+        ),
       ),
     );
   }

@@ -8,13 +8,11 @@ class Meal extends Equatable {
   const Meal({
     required this.id,
     required this.name,
-    this.drinkAlternate,
     this.category,
     this.area,
     this.instructions,
     this.thumb,
     this.tags = const [],
-    this.youtube,
     this.ingredients = const [],
     this.measures = const [],
   });
@@ -43,16 +41,58 @@ class Meal extends Equatable {
     return Meal(
       id: map['idMeal'] as String,
       name: map['strMeal'] as String,
-      drinkAlternate: map['strDrinkAlternate'] as String?,
       category: map['strCategory'] as String?,
       area: map['strArea'] as String?,
       instructions: map['strInstructions'] as String?,
       thumb: map['strMealThumb'] as String?,
       tags: tags,
-      youtube: map['strYoutube'] as String?,
       ingredients: ingredients,
       measures: measures,
     );
+  }
+
+  factory Meal.fromDbMap(Map<String, dynamic> map) {
+    final tags = <String>[];
+    final ingredients = <String>[];
+    final measures = <String>[];
+
+    if (map['tags'] != null) {
+      tags.addAll((map['tags'] as String).split(','));
+    }
+
+    if (map['ingredients'] != null) {
+      ingredients.addAll((map['ingredients'] as String).split(','));
+    }
+
+    if (map['measures'] != null) {
+      measures.addAll((map['measures'] as String).split(','));
+    }
+
+    return Meal(
+      id: map['id'] as String,
+      name: map['name'] as String,
+      category: map['category'] as String?,
+      area: map['area'] as String?,
+      instructions: map['instructions'] as String?,
+      thumb: map['thumb'] as String?,
+      tags: tags,
+      ingredients: ingredients,
+      measures: measures,
+    );
+  }
+
+  Map<String, dynamic> toDbMap() {
+    return <String, dynamic>{
+      'id': id,
+      'name': name,
+      'category': category,
+      'area': area,
+      'instructions': instructions,
+      'thumb': thumb,
+      'tags': tags.join(','),
+      'ingredients': ingredients.join(','),
+      'measures': measures.join(','),
+    };
   }
 
   static const empty = Meal(
@@ -62,28 +102,16 @@ class Meal extends Equatable {
 
   final String id;
   final String name;
-  final String? drinkAlternate;
   final String? category;
   final String? area;
   final String? instructions;
   final String? thumb;
   final List<String> tags;
-  final String? youtube;
   final List<String> ingredients;
   final List<String> measures;
 
   @override
   List<Object?> get props => [
         id,
-        name,
-        drinkAlternate,
-        category,
-        area,
-        instructions,
-        thumb,
-        tags,
-        youtube,
-        ingredients,
-        measures,
       ];
 }
