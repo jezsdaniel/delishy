@@ -1,6 +1,9 @@
 import 'package:delishy/core/network/connectivity.dart';
 import 'package:delishy/core/network/connectivity_mock.dart';
 import 'package:delishy/core/network/http_client_mock.dart';
+import 'package:delishy/features/favorites/data/data_sources/favorites_local_api.dart';
+import 'package:delishy/features/favorites/data/data_sources/favorites_local_api_impl.dart';
+import 'package:delishy/features/favorites/data/data_sources/favorites_local_api_mock.dart';
 import 'package:delishy/features/recipes/data/data_sources/recipes_remote_api.dart';
 import 'package:delishy/features/recipes/data/data_sources/recipes_remote_api_mock.dart';
 import 'package:delishy/features/recipes/data/repositories/recipes_repository_impl.dart';
@@ -45,6 +48,9 @@ class Injector {
     getIt!.registerLazySingleton<RecipesRemoteApi>(
       () => RecipesRemoteApiImpl(httpClient: getIt!.get()),
     );
+    getIt!.registerLazySingleton<FavoritesLocalStorage>(
+      FavoritesLocalStorageImpl.new,
+    );
   }
 
   void _registerBlocs() {
@@ -76,6 +82,9 @@ class Injector {
   void _registerApiLayerTest() {
     getIt!.registerLazySingleton<RecipesRemoteApi>(
       MockRecipesRemoteApi.new,
+    );
+    getIt!.registerLazySingleton<FavoritesLocalStorage>(
+      FavoritesLocalStorageMock.new,
     );
   }
 
