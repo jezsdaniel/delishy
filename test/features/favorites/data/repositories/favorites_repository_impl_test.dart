@@ -80,7 +80,8 @@ void main() {
 
         final streamController = StreamController<List<Meal>>();
         streamController.sink.add(mockMeals);
-        when(() => mockLocalStorage.getAllFavorites()).thenAnswer((_) {
+        when(() => mockLocalStorage.getAllFavorites())
+            .thenAnswer((_) async {
           return streamController.stream;
         });
 

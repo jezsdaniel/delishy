@@ -7,22 +7,9 @@ import '../../../../../helpers/helpers.dart';
 
 void main() {
   group('FavoritesLoading', () {
-    testWidgets('renders daily recipe name', (tester) async {
+    testWidgets('renders and empty box', (tester) async {
       await tester.pumpApp(const FavoritesLoading());
-      expect(find.byKey(const Key('favoritesLoading_name')), findsOneWidget);
-    });
-    testWidgets('renders daily recipe area', (tester) async {
-      await tester.pumpApp(const FavoritesLoading());
-      expect(find.byKey(const Key('favoritesLoading_area')), findsOneWidget);
-    });
-    testWidgets('renders daily recipe category', (tester) async {
-      await tester.pumpApp(const FavoritesLoading());
-      expect(
-          find.byKey(const Key('favoritesLoading_category')), findsOneWidget);
-    });
-    testWidgets('renders image', (tester) async {
-      await tester.pumpApp(const FavoritesLoading());
-      expect(find.byType(Image), findsOneWidget);
+      expect(find.byType(SizedBox), findsOneWidget);
     });
   });
 }
