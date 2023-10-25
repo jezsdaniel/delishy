@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:delishy/core/network/request_status.dart';
+import 'package:delishy/core/use_cases/use_case.dart';
 import 'package:delishy/features/recipes/domain/entities/meal.dart';
 import 'package:delishy/features/recipes/domain/use_cases/get_random_meal.dart';
 import 'package:equatable/equatable.dart';
@@ -24,7 +25,7 @@ class DailyRecipeBloc extends Bloc<DailyRecipeEvent, DailyRecipeState> {
     Emitter<DailyRecipeState> emit,
   ) async {
     emit(state.copyWith(status: RequestStatus.loading));
-    final resp = await _getRandomMealUseCase();
+    final resp = await _getRandomMealUseCase(NoParams());
     resp.fold(
       (l) {
         emit(
