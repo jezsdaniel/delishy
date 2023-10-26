@@ -44,6 +44,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/google_fonts/
 
 flutter_native_splash:
   color: "#ECF3F5"
