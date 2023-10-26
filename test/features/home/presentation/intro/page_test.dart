@@ -9,6 +9,7 @@ void main() {
   group('IntroPage', () {
     testWidgets('renders IntroView', (tester) async {
       await tester.pumpApp(const IntroPage());
+      await tester.pumpAndSettle();
       expect(find.byType(IntroView), findsOneWidget);
     });
   });
@@ -16,18 +17,22 @@ void main() {
   group('IntroView', () {
     testWidgets('renders title', (tester) async {
       await tester.pumpApp(const IntroView());
+      await tester.pumpAndSettle();
       expect(find.byKey(const Key('introView_title')), findsOneWidget);
     });
     testWidgets('renders image', (tester) async {
       await tester.pumpApp(const IntroView());
+      await tester.pumpAndSettle();
       expect(find.byType(Image), findsOneWidget);
     });
     testWidgets('renders description', (tester) async {
       await tester.pumpApp(const IntroView());
+      await tester.pumpAndSettle();
       expect(find.byKey(const Key('introView_description')), findsOneWidget);
     });
     testWidgets('renders next button', (tester) async {
       await tester.pumpApp(const IntroView());
+      await tester.pumpAndSettle();
       expect(find.byType(FilledButton), findsOneWidget);
     });
     testWidgets('renders widgets on small screen', (tester) async {
@@ -35,6 +40,7 @@ void main() {
       tester.view.devicePixelRatio = 1.0;
       addTearDown(tester.view.resetPhysicalSize);
       await tester.pumpApp(const IntroView());
+      await tester.pumpAndSettle();
       expect(find.byKey(const Key('introView_title')), findsOneWidget);
       expect(find.byType(Image), findsOneWidget);
       expect(find.byKey(const Key('introView_description')), findsOneWidget);

@@ -13,6 +13,7 @@ void main() {
   group('HomePage', () {
     testWidgets('renders HomeView', (tester) async {
       await tester.pumpRouterAppLocation(Routes.recipes);
+      await tester.pumpAndSettle();
       expect(find.byType(HomeView), findsOneWidget);
     });
   });
@@ -20,6 +21,7 @@ void main() {
   group('HomeView', () {
     testWidgets('renders bottom navigation bar', (tester) async {
       await tester.pumpRouterAppLocation(Routes.recipes);
+      await tester.pumpAndSettle();
       expect(find.byType(NavigationBar), findsOneWidget);
     });
   });
@@ -27,6 +29,7 @@ void main() {
   group('RecipesTab', () {
     testWidgets('renders recipes tab', (tester) async {
       await tester.pumpRouterAppLocation(Routes.recipes);
+      await tester.pumpAndSettle();
       expect(find.byType(RecipesPage), findsOneWidget);
     });
     testWidgets(
@@ -85,6 +88,7 @@ void main() {
   group('FavoritesTab', () {
     testWidgets('renders favorites tab', (tester) async {
       await tester.pumpRouterAppLocation(Routes.favorites);
+      await tester.pumpAndSettle();
       expect(find.byType(FavoritesPage), findsOneWidget);
     });
     testWidgets(
@@ -147,6 +151,7 @@ void main() {
   group('CookTab', () {
     testWidgets('renders cook tab', (tester) async {
       await tester.pumpRouterAppLocation(Routes.cookNow);
+      await tester.pumpAndSettle();
       expect(find.byType(CookPage), findsOneWidget);
     });
     testWidgets(
@@ -205,6 +210,7 @@ void main() {
   group('SettingsTab', () {
     testWidgets('renders cook tab', (tester) async {
       await tester.pumpRouterAppLocation(Routes.settings);
+      await tester.pumpAndSettle();
       expect(find.byType(SettingsPage), findsOneWidget);
     });
     testWidgets(

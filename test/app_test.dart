@@ -6,6 +6,7 @@ void main() {
   group('App', () {
     testWidgets('renders IntroPage', (tester) async {
       await tester.pumpWidget(const App());
+      await tester.pumpAndSettle();
       expect(find.byType(IntroPage), findsOneWidget);
     });
   });

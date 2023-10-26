@@ -54,6 +54,7 @@ void main() {
           ),
         ),
       );
+      await tester.pump(const Duration(milliseconds: 100));
       expect(find.byType(RecipeDetailsView), findsOneWidget);
     });
   });
@@ -68,6 +69,7 @@ void main() {
           ),
         ),
       );
+      await tester.pump(const Duration(milliseconds: 100));
       expect(find.text(mealWithImage.name), findsWidgets);
       expect(find.byType(Image, skipOffstage: false), findsOneWidget);
       expect(
@@ -91,6 +93,7 @@ void main() {
           ),
         ),
       );
+      await tester.pump(const Duration(milliseconds: 100));
       expect(find.text(mealWithoutImage.name), findsWidgets);
       expect(find.byKey(const Key('recipeDetails_noImage')), findsOneWidget);
       expect(find.byType(Image, skipOffstage: false), findsNothing);
@@ -112,6 +115,7 @@ void main() {
           ),
         ),
       );
+      await tester.pump(const Duration(milliseconds: 100));
       for (final tag in mealWithImage.tags) {
         expect(find.text(tag), findsOneWidget);
       }
@@ -126,6 +130,7 @@ void main() {
           ),
         ),
       );
+      await tester.pump(const Duration(milliseconds: 100));
       for (var i = 0; i < mealWithImage.ingredients.length; i++) {
         expect(
           find.text(
@@ -155,20 +160,21 @@ void main() {
           ),
         ),
       );
+      await tester.pump(const Duration(milliseconds: 100));
       expect(find.text('Ingredients'), findsNothing);
     });
 
     testWidgets('renders recipe details page with instructions',
         (tester) async {
-          await mockNetworkImagesFor(
-                () => tester.pumpApp(
-              BlocProvider(
-                create: (context) => favoritesBloc,
-                child: const RecipeDetailsPage(recipe: mealWithImage),
-              ),
-            ),
-          );
-
+      await mockNetworkImagesFor(
+        () => tester.pumpApp(
+          BlocProvider(
+            create: (context) => favoritesBloc,
+            child: const RecipeDetailsPage(recipe: mealWithImage),
+          ),
+        ),
+      );
+      await tester.pump(const Duration(milliseconds: 100));
       expect(find.text(mealWithImage.instructions ?? ''), findsOneWidget);
     });
 
@@ -186,13 +192,14 @@ void main() {
       );
 
       await mockNetworkImagesFor(
-            () => tester.pumpApp(
+        () => tester.pumpApp(
           BlocProvider(
             create: (context) => favoritesBloc,
             child: const RecipeDetailsPage(recipe: mealWithoutInstructions),
           ),
         ),
       );
+      await tester.pump(const Duration(milliseconds: 100));
       expect(find.text('Instructions'), findsNothing);
     });
   });
