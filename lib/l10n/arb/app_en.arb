@@ -18,6 +18,7 @@
     "instructions": "Instructions",
     "ingredients": "Ingredients",
     "favoriteRecipes": "Favorite recipes",
+    "noFavoriteRecipesYet": "No favorite recipes yet",
     "@counterAppBarTitle": {
         "description": "Text shown in the AppBar of the Counter Page"
     }
