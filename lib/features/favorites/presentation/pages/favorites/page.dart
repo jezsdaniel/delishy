@@ -1,5 +1,6 @@
 import 'package:delishy/core/network/request_status.dart';
 import 'package:delishy/features/favorites/presentation/manager/favorites/favorites_bloc.dart';
+import 'package:delishy/features/favorites/presentation/pages/favorites/empty.dart';
 import 'package:delishy/features/favorites/presentation/pages/favorites/failure.dart';
 import 'package:delishy/features/favorites/presentation/pages/favorites/loading.dart';
 import 'package:delishy/features/favorites/presentation/pages/favorites/success.dart';
@@ -45,6 +46,9 @@ class _FavoritesViewState extends State<FavoritesView> {
             return const FavoritesLoading();
           } else if (state.status == RequestStatus.failure) {
             return const FavoritesFailure();
+          } else if (state.status == RequestStatus.success &&
+              state.favorites.isEmpty) {
+            return const FavoritesEmpty();
           } else if (state.status == RequestStatus.success) {
             return FavoritesSuccess(favorites: state.favorites);
           } else {

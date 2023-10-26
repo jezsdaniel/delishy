@@ -5,5 +5,5 @@ abstract class FavoritesLocalStorage {
 
   Future<int> removeFavorite(Meal meal);
 
-  Stream<List<Meal>> getAllFavorites();
+  Future<Stream<List<Meal>>> getAllFavorites();
 }

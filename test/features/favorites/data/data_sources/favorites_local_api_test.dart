@@ -28,7 +28,7 @@ void main() {
     });
 
     test('addFavorite adds a meal to the database', () async {
-      final stream = favoritesLocalStorage.getAllFavorites();
+      final stream = await favoritesLocalStorage.getAllFavorites();
       await favoritesLocalStorage.addFavorite(testMeal);
       final favorites = await stream.first;
       expect(favorites, contains(testMeal));
@@ -37,7 +37,7 @@ void main() {
     test('removeFavorite removes a meal from the database', () async {
       await favoritesLocalStorage.addFavorite(testMeal);
       await favoritesLocalStorage.removeFavorite(testMeal);
-      final stream = favoritesLocalStorage.getAllFavorites();
+      final stream = await favoritesLocalStorage.getAllFavorites();
       final favorites = await stream.first;
       expect(favorites, isNot(contains(testMeal)));
     });
@@ -51,7 +51,7 @@ void main() {
       for (final meal in meals) {
         await favoritesLocalStorage.addFavorite(meal);
       }
-      final stream = favoritesLocalStorage.getAllFavorites();
+      final stream = await favoritesLocalStorage.getAllFavorites();
       final favorites = await stream.first;
       expect(favorites, meals);
     });

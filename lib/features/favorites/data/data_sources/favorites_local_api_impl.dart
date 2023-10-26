@@ -66,7 +66,10 @@ class FavoritesLocalStorageImpl extends FavoritesLocalStorage {
   }
 
   @override
-  Stream<List<Meal>> getAllFavorites() {
+  Future<Stream<List<Meal>>> getAllFavorites() async {
+    if (favoritesDb == null) {
+      await initDatabase();
+    }
     return favoritesStreamController.asBroadcastStream();
   }
 }

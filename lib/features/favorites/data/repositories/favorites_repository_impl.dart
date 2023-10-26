@@ -36,7 +36,7 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
   @override
   Future<Either<Failure, Stream<List<Meal>>>> getAllFavorites() async {
     try {
-      final resp = api.getAllFavorites();
+      final resp = await api.getAllFavorites();
 
       return Right(resp);
     } catch (ex) {
